@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
+
 import { getContacts } from 'redux/contacts/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import css from './Form.module.css';
@@ -35,7 +35,6 @@ export const Form = () => {
     const newContacts = {
       name,
       number,
-      id: nanoid(3),
     };
 
     if (
