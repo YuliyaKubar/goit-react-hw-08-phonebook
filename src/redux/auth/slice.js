@@ -40,11 +40,20 @@ const authSlice = createSlice({
       })
       .addCase(refreshUser.rejected, state => {
         state.isRefreshing = false;
-      });
-
-    // .addMatcher(action => action.type.endsWith('/pending'), handlePending)
-    // .addMatcher(action => action.type.endsWith('/rejected'), handleRejected);
+      })
+      .addMatcher(action => action.type.endsWith('/pending'), handlePending)
+      .addMatcher(action => action.type.endsWith('/rejected'), handleRejected);
   },
 });
+
+function handlePending(state) {
+  state.isLoading = true;
+  state.error = null;
+}
+
+function handleRejected(state, { payload }) {
+  state.isLoading = false;
+  state.error = payload;
+}
 
 export const authReducer = authSlice.reducer;
